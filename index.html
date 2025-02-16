@@ -1,273 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Val's Day!</title>
-    <style>
-        /* Custom background */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('360_F_1138331405_ko8pVsEM2KYhikxGIlhRg5Bo9UjmCGqo.jpg') no-repeat center center/cover;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            overflow: hidden; /* Hide overflow for animations */
-            position: relative;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8 Years of Friendship</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #fbc2eb, #ff9a9e);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-     /* Card styling */
-     .card {
-            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            max-width: 90%; /* Responsive width */
-            width: 100%;
-            position: relative;
-            z-index: 2; /* Ensure card is above animations */
-        }
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-        /* Container for the two images */
-        .image-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap; /* Wrap images on small screens */
-        }
+    /* Landing Page Styles */
+    .landing-page {
+      position: relative;
+      z-index: 2;
+    }
 
-        /* Image styling */
-        .card img {
-            width: 120px; /* Smaller for mobile */
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #ff6f61;
-            box-shadow: 0 0 20px rgba(255, 111, 97, 0.8), 0 0 40px rgba(255, 111, 97, 0.6); /* Glowing border */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth tap effect */
-            cursor: pointer; /* Indicates the image is clickable */
-            margin: 10px; /* Space between images */
-        }
+    .landing-page h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
 
-        /* Tap effect for the images */
-        .card img:active {
-            transform: scale(1.1); /* Slightly enlarge on tap */
-            box-shadow: 0 0 30px rgba(255, 111, 97, 1), 0 0 60px rgba(255, 111, 97, 0.8); /* Enhanced glow on tap */
-        }
+    .landing-page a {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      color: #fff;
+      background: #ff6f61;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
 
-        /* Message styling */
-        h1 {
-            color: #ff6f61;
-            font-size: 1.8em; /* Smaller for mobile */
-            margin: 10px 0;
-            text-shadow: 0 0 10px rgba(255, 111, 97, 0.8); /* Glowing text */
-        }
+    .landing-page a:hover {
+      transform: scale(1.1);
+      background: #ff7eb9;
+    }
 
-        p {
-            color: #333;
-            font-size: 1em; /* Smaller for mobile */
-            line-height: 1.6;
-        }
+    /* Falling Hearts Animation */
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-        /* Heart animation */
-        .heart {
-            color: #ff6f61;
-            font-size: 1.5em; /* Smaller for mobile */
-            animation: beat 1s infinite;
-        }
+    .hearts span {
+      position: absolute;
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: #ff6f61;
+      clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+      animation: fall 5s linear infinite;
+    }
 
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
 
-        /* Pop-up message styling */
-        .popup {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 3; /* Ensure pop-up is above everything */
-            max-width: 80%; /* Responsive width */
-            width: 100%;
-            text-align: center;
-        }
+    .hearts span:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+    }
 
-        .popup p {
-            font-size: 1.1em;
-            color: #333;
-        }
+    .hearts span:nth-child(2) {
+      left: 20%;
+      animation-delay: 2s;
+    }
 
-        /* Flower animation styling */
-        .flower {
-            position: absolute;
-            top: -50px;
-            width: 30px;
-            height: 30px;
-            background-image: url('flower.jpg'); /* Ensure this matches your file name */
-            background-size: cover;
-            z-index: 1;
-            animation: fall linear infinite;
-        }
+    .hearts span:nth-child(3) {
+      left: 30%;
+      animation-delay: 4s;
+    }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
+    .hearts span:nth-child(4) {
+      left: 40%;
+      animation-delay: 6s;
+    }
 
-        /* Falling hearts animation */
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Ensure hearts are behind the card */
-        }
+    .hearts span:nth-child(5) {
+      left: 50%;
+      animation-delay: 8s;
+    }
 
+    .hearts span:nth-child(6) {
+      left: 60%;
+      animation-delay: 10s;
+    }
 
-    </style>
+    .hearts span:nth-child(7) {
+      left: 70%;
+      animation-delay: 12s;
+    }
+
+    .hearts span:nth-child(8) {
+      left: 80%;
+      animation-delay: 14s;
+    }
+
+    .hearts span:nth-child(9) {
+      left: 90%;
+      animation-delay: 16s;
+    }
+
+    .hearts span:nth-child(10) {
+      left: 100%;
+      animation-delay: 18s;
+    }
+
+    /* Main Content Styles */
+    #main-content {
+      display: none; /* Hidden initially */
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    /* 3D Glowing Text for "8 Years of Friendship" */
+    #main-content h1 {
+      font-size: 4rem;
+      color: #fff;
+      text-shadow: 4px 4px 0 #ff6f61, 8px 8px 0 rgba(0, 0, 0, 0.2), 0 0 10px #ff6f61, 0 0 20px #ff6f61;
+      transform: perspective(500px) rotateX(10deg);
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 4px 4px 0 #ff6f61, 8px 8px 0 rgba(0, 0, 0, 0.2), 0 0 10px #ff6f61, 0 0 20px #ff6f61;
+      }
+      100% {
+        text-shadow: 6px 6px 0 #ff6f61, 12px 12px 0 rgba(0, 0, 0, 0.2), 0 0 20px #ff6f61, 0 0 40px #ff6f61;
+      }
+    }
+
+    /* Slideshow Styles */
+    .slideshow-container {
+      position: relative;
+      max-width: 90%;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide img {
+      width: auto;
+      height: 60vh; /* Adjust height for portrait orientation */
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    /* Friendship Section Styles */
+    .friendship-section {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .friendship-section h2 {
+      font-size: 2rem;
+      color: #ff6f61;
+    }
+
+    .friendship-section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-    <!-- Falling hearts canvas -->
-    <canvas id="hearts"></canvas>
+  <!-- Landing Page -->
+  <div class="landing-page">
+    <h1>Click Here for Our 8 Years Friendship Journey</h1>
+    <a href="#main-content">Click Here</a>
+  </div>
 
-    <!-- Valentine's Day card -->
-    <div class="card">
-        <!-- Container for the two images -->
-        <div class="image-container">
-            <!-- Add your friend's first picture here -->
-            <img src="bestie1.jpg" alt="My Best Friend" onclick="showPopup('Life is sweeter with you by my side! 🍭💗')">
-            <!-- Add your friend's second picture here -->
-            <img src="bestie2.jpg" alt="My Best Friend" onclick="showPopup('Thank you for being YOU – you’re amazing! 🌟💖')">
+  <!-- Falling Hearts -->
+  <div class="hearts">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Main Content (Hidden Initially) -->
+  <div id="main-content">
+    <!-- 3D Glowing Text -->
+    <h1>8 Years of Friendship</h1>
+    <p>Celebrating a bond that has stood the test of time. 💖</p>
+
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+      <div class="slides">
+        <div class="slide">
+          <img src="image1.jpg" alt="Friendship Image 1">
         </div>
-        <!-- Valentine's Day message -->
-        <h1>Happy Val's Day! 💖</h1>
-        <p>🌸 To My Favorite Person 🌸,</p>
-        <p>You light up my world in the warmest way,
-Like sunshine brightening up the day. ☀️💖
-Through laughter, love, and moments true,
-I’m so grateful to have a friend like you!
-
-No words can match the joy you bring,
-Like the sweetest song my heart can sing. 🎶💕
-On this special day, just know it’s true,
-Valentine’s Day is brighter with you! ❤️✨
-
-</p>
-        <div class="heart">❤</div>
+        <div class="slide">
+          <img src="image2.jpg" alt="Friendship Image 2">
+        </div>
+        <div class="slide">
+          <img src="image3.jpg" alt="Friendship Image 3">
+        </div>
+        <!-- Add more slides as needed -->
+      </div>
     </div>
 
-    <!-- Pop-up message -->
-    <div id="popup" class="popup">
-        <p id="popup-message"></p>
+    <!-- Friendship Section -->
+    <div class="friendship-section">
+      <h2>Our Journey Together</h2>
+      <p>
+        For 8 incredible years, we've shared laughter, tears, and countless memories. 
+        Through thick and thin, our friendship has only grown stronger. Here's to many 
+        more years of adventures, support, and love. Cheers to us! 🥂
+      </p>
     </div>
+  </div>
 
-    <!-- Flower container -->
-    <div id="flower-container"></div>
-
-    <!-- Falling hearts script -->
-    <script>
-        const canvas = document.getElementById('hearts');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const hearts = [];
-        const heartColors = ['#ff1493', '#ff69b4', '#ff85a2'];
-
-        class Heart {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = -50;
-        this.size = Math.random() * 40 + 20; // Larger hearts
-        this.color = heartColors[Math.floor(Math.random() * heartColors.length)];
-        this.speed = Math.random() * 3 + 2; // Faster hearts
-    }
-    draw() {
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.bezierCurveTo(this.x - this.size / 2, this.y - this.size / 2, this.x - this.size, this.y + this.size / 3, this.x, this.y + this.size);
-        ctx.bezierCurveTo(this.x + this.size, this.y + this.size / 3, this.x + this.size / 2, this.y - this.size / 2, this.x, this.y);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-    }
-    update() {
-        this.y += this.speed;
-        if (this.y > canvas.height) {
-            this.y = -50;
-            this.x = Math.random() * canvas.width;
-        }
-        this.draw();
-    }
-}
-
-        function init() {
-            for (let i = 0; i < 70; i++) {
-                hearts.push(new Heart());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            hearts.forEach(heart => heart.update());
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-
-        // Pop-up message functionality
-        function showPopup(message) {
-    const popup = document.getElementById('popup');
-    const popupMessage = document.getElementById('popup-message');
-
-    popupMessage.textContent = message;
-    popup.style.display = 'block';
-
-    // Smooth fade-in
-    setTimeout(() => {
-        popup.style.opacity = '1';
-    }, 50); // Small delay for smooth transition
-
-    // Fade out after 5 seconds
-    setTimeout(() => {
-        popup.style.opacity = '0';
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 500); // Wait for fade-out transition to complete
-    }, 5000);
-}
-
-
-        // Flower animation functionality
-        function createFlowers() {
-            const flowerContainer = document.getElementById('flower-container');
-            flowerContainer.innerHTML = ''; // Clear previous flowers
-
-            for (let i = 0; i < 20; i++) {
-                const flower = document.createElement('div');
-                flower.classList.add('flower');
-                flower.style.left = '${Math.random() * 100}vw';
-                flower.style.animationDuration = '${Math.random() * 3 + 2}s';
-                flowerContainer.appendChild(flower);
-            }
-
-            // Remove flowers after animation ends
-            setTimeout(() => {
-                flowerContainer.innerHTML = '';
-            }, 3000);
-        }
-    </script>
+  <script>
+    // Show main content when the button is clicked
+    document.querySelector('.landing-page a').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector('.landing-page').style.display = 'none';
+      document.querySelector('#main-content').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
